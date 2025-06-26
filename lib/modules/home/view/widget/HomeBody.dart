@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:task/core/const/AppColor.dart';
-import 'package:task/core/widget/CustomPart_list.dart';
+import 'package:task/modules/home/view/widget/CustomPart_list.dart';
 import 'package:task/core/widget/cusotmId.dart';
-import 'package:task/core/widget/customListview.dart';
-import 'package:task/core/widget/custom_part.dart';
+import 'package:task/modules/home/view/widget/customListview.dart';
+import 'package:task/modules/home/view/widget/custom_part.dart';
 import 'package:task/core/widget/customdivider.dart';
 import 'package:task/core/widget/customimage.dart';
-import 'package:task/core/widget/listtile_item.dart';
+import 'package:task/modules/home/view/widget/listtile_item.dart';
 import 'package:task/modules/home/data/listTile_model.dart';
 
 class HomeBody extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task/core/widget/listtile_item.dart';
+import 'package:task/modules/home/view/widget/listtile_item.dart';
 import 'package:task/modules/home/data/listTile_model.dart';
 
 class CustomListview extends StatelessWidget {

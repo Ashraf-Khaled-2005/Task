@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task/core/const/AppColor.dart';
-import 'package:task/core/widget/custom_part.dart';
+import 'package:task/modules/home/view/widget/custom_part.dart';
 import 'package:task/core/widget/customdivider.dart';
 import 'package:task/modules/chart/view/chartview.dart';
 import 'package:task/modules/home/data/listTile_model.dart';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:task/core/widget/headchart.dart';
+import 'package:task/modules/chart/view/widget/FooterChartItem.dart';
+import 'package:task/modules/chart/view/widget/headchart.dart';
 
 class OrderItemCard extends StatelessWidget {
   const OrderItemCard({super.key});
@@ -83,17 +84,7 @@ class OrderItemCard extends StatelessWidget {
         // Price Row
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('\$25',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-              Text('2x uds.',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-              Text('Total: \$50',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            ],
-          ),
+          child: FooterChartitem_price(),
         ),
 
         const SizedBox(height: 24),

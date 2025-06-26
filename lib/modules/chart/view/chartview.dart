@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task/core/widget/chartitem.dart';
+import 'package:task/modules/chart/view/widget/chartitem.dart';
 
 class ChartView extends StatelessWidget {
   const ChartView({super.key});
