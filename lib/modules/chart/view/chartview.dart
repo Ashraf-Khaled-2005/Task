@@ -22,7 +22,7 @@ class ChartView extends StatelessWidget {
             return Center(child: Text(controller.errorMessage.value));
           }
 
-          return ListView_Chart();
+          return const ListView_Chart();
         }),
       ),
     );

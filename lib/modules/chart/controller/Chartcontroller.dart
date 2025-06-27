@@ -28,7 +28,9 @@ class ChartController extends GetxController {
           imageUrl: doc['imageUrl'] ?? '',
           date: (doc['date'] as String) ?? '',
           price: doc['price'] ?? 0,
-          quantity: doc['quantity'] ?? 0,
+          quantity: doc['quantity'] != null
+              ? RxInt(doc['quantity'])
+              : RxInt(0), // Ensure quantity is always an RxInt
           status: doc['status'] ?? '',
         );
       }).toList();

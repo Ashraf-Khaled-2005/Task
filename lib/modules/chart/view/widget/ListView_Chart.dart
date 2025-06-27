@@ -14,7 +14,7 @@ class ListView_Chart extends StatelessWidget {
     final constroll = Get.find<ChartController>();
     return ListView.separated(
         itemCount: constroll.chartItems.value.length,
-        separatorBuilder: (context, index) => SizedBox(
+        separatorBuilder: (context, index) => const SizedBox(
               height: 20,
             ),
         itemBuilder: (context, index) => OrderItemCard(
