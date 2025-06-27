@@ -16,11 +16,11 @@ class HeadChartItem extends StatelessWidget {
       children: [
         Text(
           'Order: ${status}',
-          style: TextStyle(color: AppColors.salmon, fontSize: 14),
+          style: TextStyle(color: AppColors.black, fontSize: 14),
         ),
         Text(
           'Date: ${date}',
-          style: TextStyle(color: AppColors.salmon, fontSize: 14),
+          style: TextStyle(color: AppColors.black, fontSize: 14),
         ),
       ],
     );

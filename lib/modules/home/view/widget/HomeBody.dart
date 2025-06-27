@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:task/core/const/AppColor.dart';
+import 'package:task/modules/home/controller/home_controller.dart';
 import 'package:task/modules/home/view/widget/CustomPart_list.dart';
 import 'package:task/core/widget/cusotmId.dart';
 import 'package:task/modules/home/view/widget/customListview.dart';
@@ -24,25 +27,29 @@ class HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<HomeController>();
+
     return Column(
       children: [
         const CustomImage(),
-        const Text(
-          "John Doe",
-          style: TextStyle(
+        Text(
+          controller.user.value?.name ?? 'Loading...',
+          style: const TextStyle(
               fontSize: 28,
               color: AppColors.orangeDark,
               fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 10),
-        const CustomIDText(),
+        CustomIDText(id: controller.user.value?.id ?? 0),
         const SizedBox(height: 20),
         Container(
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
             decoration: BoxDecoration(
                 color: AppColors.salmon,
                 borderRadius: BorderRadius.circular(24)),
-            child: const CustomPartsList()),
+            child: CustomPartsList(
+              user: controller.user.value!,
+            )),
         const SizedBox(
           height: 20,
         ),

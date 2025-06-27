@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:task/core/const/AppColor.dart';
 import 'package:task/main.dart';
+import 'package:task/modules/home/controller/home_controller.dart';
 import 'package:task/modules/home/view/widget/HomeBody.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -8,6 +11,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<HomeController>();
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -27,8 +31,16 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: HomeBody(),
+        padding: EdgeInsets.all(16.0),
+        child: Obx(() {
+          if (controller.isLoading.value) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (controller.error.isNotEmpty) {
+            return Center(child: Text(controller.error.value));
+          }
+          return HomeBody();
+        }),
       ),
     );
   }

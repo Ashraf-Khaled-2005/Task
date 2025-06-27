@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProfileField extends StatelessWidget {
+  final TextEditingController controller;
   final String label;
   final String hint;
 
@@ -8,6 +9,7 @@ class ProfileField extends StatelessWidget {
     super.key,
     required this.label,
     required this.hint,
+    required this.controller,
   });
 
   @override
@@ -22,7 +24,7 @@ class ProfileField extends StatelessWidget {
                   const TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
           const SizedBox(height: 6),
           TextField(
-            readOnly: true,
+            controller: controller,
             decoration: InputDecoration(
               hintText: hint,
               filled: true,

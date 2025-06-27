@@ -1,8 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:task/core/const/AppColor.dart';
-import 'package:task/modules/home/Home.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+
+import 'package:task/routes/App_page.dart';
+import 'package:task/routes/Approutes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +16,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-        debugShowCheckedModeBanner: false, home: HomeScreen());
+    return GetMaterialApp(
+        initialRoute: AppRoutes.home,
+        getPages: AppPage.routes,
+        debugShowCheckedModeBanner: false);
   }
 }

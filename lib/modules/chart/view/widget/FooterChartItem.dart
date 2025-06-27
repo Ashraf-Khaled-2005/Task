@@ -13,11 +13,11 @@ class FooterChartitem_price extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text('\$${price}',
+        Text('\$$price',
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
         Text('$quantity x uds.',
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-        Text('Total: \${}${(price * quantity).toStringAsFixed(2)}',
+        Text('Total: \$${(price * quantity).toStringAsFixed(2)}',
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
       ],
     );

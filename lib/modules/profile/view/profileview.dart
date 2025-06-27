@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:task/core/const/AppColor.dart';
 import 'package:task/core/widget/customimage.dart';
 import 'package:task/core/widget/CustomTextField.dart';
+import 'package:task/data/UserModel.dart';
 
 import '../../../core/widget/checkBox.dart';
 import '../../../core/widget/cusotmId.dart';
@@ -14,6 +17,25 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  late TextEditingController nameController;
+  late TextEditingController emailController;
+  late TextEditingController phoneController;
+  late TextEditingController dateController;
+
+  late UserModel user;
+  @override
+  void initState() {
+    // TODO: implement initState
+    final args = Get.arguments;
+    user = args['user'] as UserModel;
+    ismaleSelected = user.genger == "male";
+    nameController = TextEditingController(text: user.name);
+    emailController = TextEditingController(text: user.email);
+    phoneController = TextEditingController(text: user.phone);
+    dateController = TextEditingController(text: user.date);
+    super.initState();
+  }
+
   bool ismaleSelected = false;
   @override
   Widget build(BuildContext context) {
@@ -58,25 +80,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 width: double.infinity,
                 color: AppColors.salmon,
-                child: const Column(
+                child: Column(
                   children: [
                     Text(
-                      'Madison Smith',
+                      user.name,
                       style: TextStyle(
                           fontSize: 28,
                           color: AppColors.orangeDark,
                           fontWeight: FontWeight.bold),
                     ),
-                    CustomIDText(),
+                    CustomIDText(id: 5),
                   ],
                 ),
               ),
               const SizedBox(height: 24),
-              const ProfileField(label: 'Full Name', hint: 'Madison Smith'),
-              const ProfileField(label: 'Email', hint: 'Madisons@Example.Com'),
-              const ProfileField(label: 'Mobile Number', hint: '+123 4567 890'),
-              const ProfileField(
-                  label: 'Date Of Birth', hint: '01 / 04 / 199X'),
+              ProfileField(
+                  label: 'Full Name',
+                  hint: user.name,
+                  controller: nameController),
+              ProfileField(
+                  label: 'Email',
+                  hint: user.email,
+                  controller: emailController),
+              ProfileField(
+                  label: 'Mobile Number',
+                  hint: user.phone,
+                  controller: phoneController),
+              ProfileField(
+                  label: 'Date Of Birth',
+                  hint: user.date,
+                  controller: dateController),
               const SizedBox(height: 16),
               const Align(
                 alignment: Alignment.centerLeft,
@@ -114,7 +147,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 width: double.infinity,
                 height: 48,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    checkdifference();
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFF4B5A4),
                     shape: RoundedRectangleBorder(
@@ -135,5 +170,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
     );
+  }
+
+  void checkdifference() {
+    var gender = ismaleSelected ? "male" : "female";
+    if (nameController.text != user.name ||
+        emailController.text != user.email ||
+        phoneController.text != user.phone ||
+        dateController.text != user.date ||
+        gender != user.genger) {
+      // Logic to handle the difference
+      print("Profile has been updated");
+    } else {
+      print("No changes made to the profile");
+    }
   }
 }
