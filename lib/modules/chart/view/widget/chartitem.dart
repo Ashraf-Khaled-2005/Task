@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:task/data/chartItemModel.dart';
 import 'package:task/modules/chart/view/widget/FooterChartItem.dart';
 import 'package:task/modules/chart/view/widget/headchart.dart';
 
 class OrderItemCard extends StatelessWidget {
-  const OrderItemCard({super.key});
+  final ChartItemModel item;
+  const OrderItemCard({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -11,9 +13,12 @@ class OrderItemCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Header: Status + Date
-        const Padding(
+        Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: HeadChartItem(),
+          child: HeadChartItem(
+            date: item.date,
+            status: item.status,
+          ),
         ),
         const Divider(
           color: Color(0xFFF4B5A4),
@@ -31,8 +36,8 @@ class OrderItemCard extends StatelessWidget {
               // Product Image
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.network(
-                  'https://i.imgur.com/E0R1JZk.png', // Example lamp image
+                child: Image.asset(
+                  'assets/item2.png', // Example lamp image
                   width: 80,
                   height: 80,
                   fit: BoxFit.cover,
@@ -41,12 +46,12 @@ class OrderItemCard extends StatelessWidget {
               const SizedBox(width: 12),
 
               // Title and Description
-              const Expanded(
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Blue Table Lamp',
+                      item.title,
                       style: TextStyle(
                         color: Color(0xFFCC7861),
                         fontWeight: FontWeight.bold,
@@ -55,7 +60,7 @@ class OrderItemCard extends StatelessWidget {
                     ),
                     SizedBox(height: 4),
                     Text(
-                      'In a laoreet purus. Integer turpis quam, laoreet id orci nec, ultrices…',
+                      item.description,
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 12,
@@ -82,9 +87,10 @@ class OrderItemCard extends StatelessWidget {
         const SizedBox(height: 12),
 
         // Price Row
-        const Padding(
+        Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: FooterChartitem_price(),
+          child:
+              FooterChartitem_price(price: item.price, quantity: item.quantity),
         ),
 
         const SizedBox(height: 24),

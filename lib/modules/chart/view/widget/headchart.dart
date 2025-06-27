@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:task/core/const/AppColor.dart';
 
 class HeadChartItem extends StatelessWidget {
+  final String date, status;
   const HeadChartItem({
     super.key,
+    required this.date,
+    required this.status,
   });
 
   @override
@@ -12,11 +15,11 @@ class HeadChartItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Order: Canceled',
+          'Order: ${status}',
           style: TextStyle(color: AppColors.salmon, fontSize: 14),
         ),
         Text(
-          'May 22',
+          'Date: ${date}',
           style: TextStyle(color: AppColors.salmon, fontSize: 14),
         ),
       ],
