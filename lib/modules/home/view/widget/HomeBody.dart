@@ -31,7 +31,7 @@ class HomeBody extends StatelessWidget {
 
     return Column(
       children: [
-        const CustomImage(),
+        CustomImage(image: controller.user.value!.image),
         Text(
           controller.user.value?.name ?? 'Loading...',
           style: const TextStyle(

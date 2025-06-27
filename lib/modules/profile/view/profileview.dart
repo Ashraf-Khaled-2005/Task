@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:task/core/const/AppColor.dart';
+import 'package:task/core/util/imagepicker.dart';
 import 'package:task/core/widget/customimage.dart';
 import 'package:task/core/widget/CustomTextField.dart';
 import 'package:task/data/UserModel.dart';
@@ -21,13 +23,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late TextEditingController emailController;
   late TextEditingController phoneController;
   late TextEditingController dateController;
-
+  late var oldimage;
   late UserModel user;
   @override
   void initState() {
     // TODO: implement initState
     final args = Get.arguments;
     user = args['user'] as UserModel;
+    oldimage = user.image;
     ismaleSelected = user.genger == "male";
     nameController = TextEditingController(text: user.name);
     emailController = TextEditingController(text: user.email);
@@ -63,15 +66,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Stack(
                 alignment: Alignment.bottomRight,
                 children: [
-                  const CustomImage(),
+                  CustomImage(image: user.image),
                   Container(
                     padding: const EdgeInsets.all(4),
                     decoration: const BoxDecoration(
                       color: Color(0xFFF4B5A4),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.camera_alt,
-                        size: 20, color: Colors.white),
+                    child: IconButton(
+                        icon: Icon(Icons.camera_alt,
+                            size: 20, color: Colors.white),
+                        onPressed: () async {
+                          var fileimage = await PickerHandle.PickImageGallery();
+                          if (fileimage != null) {
+                            String imageurl = await PickerHandle.Getimgaeurl(
+                                user.id.toString(), fileimage, 'images');
+                            setState(() {
+                              user.image = imageurl;
+                            });
+                          }
+                        }),
                   ),
                 ],
               ),
@@ -172,17 +186,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  void checkdifference() {
+  void checkdifference() async {
     var gender = ismaleSelected ? "male" : "female";
     if (nameController.text != user.name ||
         emailController.text != user.email ||
         phoneController.text != user.phone ||
         dateController.text != user.date ||
+        user.image != oldimage ||
         gender != user.genger) {
       // Logic to handle the difference
+      await updateUserProfileInFirebase();
       print("Profile has been updated");
     } else {
       print("No changes made to the profile");
+    }
+  }
+
+  Future<void> updateUserProfileInFirebase() async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('Users')
+          .doc('3SILLOiQ50oo2Odq7Gr6') // assuming user.id is the doc ID
+          .update({
+        'Name': nameController.text,
+        'email': emailController.text,
+        'mobile': phoneController.text,
+        'date': dateController.text,
+        'genger': ismaleSelected ? 'male' : 'female',
+        'image': user.image,
+      });
+
+      Get.snackbar('Success', 'Profile updated successfully',
+          backgroundColor: Colors.green, colorText: Colors.white);
+    } catch (e) {
+      Get.snackbar('Error', 'Failed to update: $e',
+          backgroundColor: Colors.red, colorText: Colors.white);
     }
   }
 }

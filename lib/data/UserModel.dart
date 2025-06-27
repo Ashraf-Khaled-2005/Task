@@ -2,7 +2,7 @@ class UserModel {
   final String name;
   final String email;
   final String genger;
-  final String image;
+  String image;
   final String date;
   final int id;
   final String phone;
