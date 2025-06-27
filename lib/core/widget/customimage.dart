@@ -11,7 +11,9 @@ class CustomImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: 80,
-      backgroundImage: NetworkImage(image),
+      backgroundImage: image.isNotEmpty
+          ? NetworkImage(image)
+          : const AssetImage('assets/item2.png') as ImageProvider,
     );
   }
 }
